@@ -1,4 +1,4 @@
-package Reshatel;
+package Local::Reshatel;
 BEGIN
 {
 	use strict;
@@ -6,14 +6,18 @@ BEGIN
 	use DDP;
 	use VivodTablic;
 	use Sortirovchik;
-	use Exporter();
-	our @ISA = "Exporter";
+	use Exporter 'import';
+	#our @ISA = "Exporter";
 	our @EXPORT = qw(&resh);
 }
 
 sub resh
 {
-	my ($len, @arr) = @_;
+	my (@arr) = @_;
+	
+	my $len = 0;
+	while($arr[$len])
+	{$len++;}
 	
 	my $qwe = join (" ", @ARGV);
 	my @res=split /(?:-)/,$qwe;
@@ -35,32 +39,32 @@ sub resh
 		if($1 eq "band") 
 		{
 			$res[$i]=~ /'(?<ban>\N+)'/;
-			@arr = ost_band($len, $+{ban}, @arr);
+			@arr = ost_band($+{ban}, @arr);
 		}
 		if($1 eq "year")
 		{
 			$res[$i]=~ /'(?<yea>\N+)'/;
-			@arr = ost_year($len, $+{yea}, @arr);
+			@arr = ost_year($+{yea}, @arr);
 		}
 		if($1 eq "album")
 		{
 			$res[$i]=~ /'(?<alb>\N+)'/;
-			@arr = ost_album($len, $+{alb}, @arr);;
+			@arr = ost_album($+{alb}, @arr);;
 		}
 		if($1 eq "track")
 		{
 			$res[$i]=~ /'(?<tra>\N+)'/;
-			@arr = ost_track($len, $+{tra}, @arr);
+			@arr = ost_track($+{tra}, @arr);
 		}
 		if($1 eq "format")
 		{
 			$res[$i]=~ /'(?<for>\N+)'/;
-			@arr = ost_form($len, $+{for}, @arr);
+			@arr = ost_form($+{for}, @arr);
 		}
 		if($1 eq "columns") 
 		{
 			$res[$i]=~ s/columns //;
-			pechat_kol($len, @arr);
+			pechat_kol(@arr);
 			$ind = 1;
 		}
 		if($1 eq "sort") 
@@ -73,8 +77,8 @@ sub resh
 			if($+{sor} eq "format")	{@arr = sortirovka_form($len, @arr);}
 		}
 	}
-	if($ind == 0) {pechat($len, @arr);}
-	return @arr;
+	if($ind == 0) {pechat(@arr);}
+	#return @arr;
 }
 
 return 1;
