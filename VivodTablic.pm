@@ -1,25 +1,20 @@
-package VivodTablic;
+package Local::VivodTablic;
 BEGIN
 {
 	use strict;
 	use warnings;
 	use DDP;
-	use Exporter();
-	our @ISA = "Exporter";
+	use Exporter 'import';
+	#our @ISA = "Exporter";
 	our @EXPORT = qw(&sosdanie &pechat &ost_band &ost_year &ost_album &ost_track &ost_form &pechat_kol);
 }
 
 sub sosdanie
 {
-	my $filename = 'Mus.txt';
-
-	open(my $fh, '<:encoding(UTF-8)', $filename)
-	  or die "Could not open file '$filename' $!";
-
 	my @arr;
 	my $w=0;
 	 
-	while (my $row = <$fh>) 
+	while (my $row = <STDIN>) 
 	{
 		chomp $row;
 		$row=~ s/\.\///;
@@ -63,15 +58,16 @@ sub sosdanie
 		$w++;
 	}
 	return @arr;
-	return $w;
 }
 
 sub pechat
 {
-	my ($w, @arr) = @_;
+	my (@arr) = @_;
 	my $maxgroup = 0;
 	my $maxalbum = 0;
 	my $maxtrek = 0;
+	my $w = 0;
+	while($arr[$w])	{$w++;}
 
 	for (my $i=0; $i< $w; $i++)
 	{
@@ -167,8 +163,12 @@ sub pechat
 
 sub ost_band
 {
-	my ($w, $str, @arr) = @_;
+	my ($str, @arr) = @_;
 	my $id = 0;
+	
+	my $w = 0;
+	while($arr[$w])
+	{$w++;}
 
 	for (my $i=1; $i < $w+1; $i++)
 	{	
@@ -189,8 +189,12 @@ sub ost_band
 
 sub ost_year
 {
-	my ($w, $str, @arr) = @_;
+	my ($str, @arr) = @_;
 	my $id = 0;
+	
+	my $w = 0;
+	while($arr[$w])
+	{$w++;}
 
 	for (my $i=1; $i < $w+1; $i++)
 	{	
@@ -211,9 +215,13 @@ sub ost_year
 
 sub ost_album
 {
-	my ($w, $str, @arr) = @_;
+	my ($str, @arr) = @_;
 	my $id = 0;
 
+	my $w = 0;
+	while($arr[$w])
+	{$w++;}
+	
 	for (my $i=1; $i < $w+1; $i++)
 	{	
 		if ($arr[$i-1][2] ne $str)
@@ -233,9 +241,13 @@ sub ost_album
 
 sub ost_track
 {
-	my ($w, $str, @arr) = @_;
+	my ($str, @arr) = @_;
 	my $id = 0;
 
+	my $w = 0;
+	while($arr[$w])
+	{$w++;}
+	
 	for (my $i=1; $i < $w+1; $i++)
 	{	
 		if ($arr[$i-1][3] ne $str)
@@ -255,8 +267,12 @@ sub ost_track
 
 sub ost_form
 {
-	my ($w, $str, @arr) = @_;
+	my ($str, @arr) = @_;
 	my $id = 0;
+	
+	my $w = 0;
+	while($arr[$w])
+	{$w++;}
 
 	for (my $i=1; $i < $w+1; $i++)
 	{	
@@ -277,7 +293,7 @@ sub ost_form
 
 sub pechat_kol
 {
-	my ($len, @arr) = @_;
+	my (@arr) = @_;
 	my $maxgroup = 0;
 	my $maxalbum = 0;
 	my $maxtrek = 0;
@@ -287,6 +303,10 @@ sub pechat_kol
 	my $in = 0;
 	my $dl = 0;
 	my $stroka = "";
+	
+	my $len = 0;
+	while($arr[$len])
+	{$len++;}
 	
 	my $qwe = join (" ", @ARGV);
 	my @res=split /(?:-)/,$qwe;
@@ -358,8 +378,6 @@ sub pechat_kol
 			print "| ";
 			for (my $j=0; $j <= $#kol; $j++)
 			{
-				#print "st $stroka\n";
-				#print "el $kol[$j]\n";
 				if($j == $#kol)
 				{
 					$ind = 1;
