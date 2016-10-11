@@ -1,3 +1,5 @@
+#!/usr/bin/env perl
+
 use strict;
 use warnings;
 use diagnostics;
@@ -8,8 +10,6 @@ use Sortirovchik;
 use Reshatel;
 
 my @dar = sosdanie();
-my $len = sosdanie();
-
-@dar = resh($len, @dar);
+resh(@dar);
 
 1;
