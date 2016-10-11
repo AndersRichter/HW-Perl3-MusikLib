@@ -1,16 +1,20 @@
-package Sortirovchik;
+package Local::Sortirovchik;
 BEGIN
 {
 	use strict;
 	use warnings;
-	use Exporter();
-	our @ISA = "Exporter";
+	use Exporter 'import';
+	#our @ISA = "Exporter";
 	our @EXPORT = qw(&sortirovka_band &sortirovka_year &sortirovka_album &sortirovka_track &sortirovka_form);
 }
 
 sub sortirovka_band
 {
-	my ($len, @arr) = @_;
+	my (@arr) = @_;
+	
+	my $len = 0;
+	while($arr[$len])
+	{$len++;}
 	
 	for (my $i=0; $i < ($len-1); $i++)
 	{
@@ -32,7 +36,11 @@ sub sortirovka_band
 
 sub sortirovka_year
 {
-	my ($len, @arr) = @_;
+	my (@arr) = @_;
+	
+	my $len = 0;
+	while($arr[$len])
+	{$len++;}
 	
 	for (my $i=0; $i < ($len-1); $i++)
 	{
@@ -54,7 +62,11 @@ sub sortirovka_year
 
 sub sortirovka_album
 {
-	my ($len, @arr) = @_;
+	my (@arr) = @_;
+	
+	my $len = 0;
+	while($arr[$len])
+	{$len++;}
 	
 	for (my $i=0; $i < ($len-1); $i++)
 	{
@@ -76,7 +88,11 @@ sub sortirovka_album
 
 sub sortirovka_track
 {
-	my ($len, @arr) = @_;
+	my (@arr) = @_;
+	
+	my $len = 0;
+	while($arr[$len])
+	{$len++;}
 	
 	for (my $i=0; $i < ($len-1); $i++)
 	{
@@ -98,7 +114,11 @@ sub sortirovka_track
 
 sub sortirovka_form
 {
-	my ($len, @arr) = @_;
+	my (@arr) = @_;
+	
+	my $len = 0;
+	while($arr[$len])
+	{$len++;}
 	
 	for (my $i=0; $i < ($len-1); $i++)
 	{
